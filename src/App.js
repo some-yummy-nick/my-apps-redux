@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
+
 class Textarea extends Component {
 
-	constructor () {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			text: "bob"
+			text: props.text
 		}
 	}
 
-	setValue=(e)=>{
+	setValue = (e) => {
 		this.setState({
-			text:e.currentTarget.value
+			text: e.currentTarget.value
 		});
 	};
 
@@ -19,18 +21,28 @@ class Textarea extends Component {
 		return (
 			<div>
 				<textarea name="" id="" cols="30" rows="10" value={this.state.text} onChange={this.setValue}></textarea>
-			<div className="score">{this.state.text.length}</div>
+				<div className="score">{this.state.text.length}</div>
+				<div>{this.props.name}</div>
 			</div>
 		)
 	}
 }
 
+Textarea.defaultProps = {
+	name: 'Stranger',
+	text: "male"
+};
+
+Textarea.propTypes={
+	text:PropTypes.string,
+}
+
 class App extends Component {
-  render() {
-    return (
-		    <Textarea/>
-    );
-  }
+	render() {
+		return (
+			<Textarea text={"Bob"}/>
+		);
+	}
 }
 
 export default App;
