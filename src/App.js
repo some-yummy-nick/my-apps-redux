@@ -28,18 +28,25 @@ class Table extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			data:this.props.initialData
+			data:this.props.initialData,
+			sortby: null,
+			descending: false,
 		}
 	}
 
 	sort=(e)=>{
 		var column= e.target.cellIndex;
-		var item = this.state.data.slice();
-		item.sort(function(a, b) {
-			return a[column] > b[column] ? 1 : -1;
+		var data = this.state.data.slice();
+		var descending = this.state.sortby === column && !this.state.descending;
+		data.sort(function(a, b) {
+			return descending
+				? (a[column] < b[column] ? 1 : -1)
+				: (a[column] > b[column] ? 1 : -1);
 		});
 		this.setState({
-			data: item,
+			data: data,
+			sortby: column,
+			descending: descending,
 		});
 	}
 
@@ -48,7 +55,13 @@ class Table extends Component {
 			<table>
 				<thead onClick={this.sort}>
 				<tr>
-					{headers.map((header, index) => <th key={index}>{header}</th>)}
+					{headers.map((header, index) =>{
+							if (this.state.sortby === index) {
+								header += this.state.descending ? ' \u2191' : ' \u2193'
+							}
+						return <th key={index}>{header}</th>
+					}
+					)}
 				</tr>
 				</thead>
 				<tbody>
