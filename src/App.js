@@ -31,16 +31,28 @@ class Table extends Component {
 			data:this.props.initialData
 		}
 	}
+
+	sort=(e)=>{
+		var column= e.target.cellIndex;
+		var item = this.state.data.slice();
+		item.sort(function(a, b) {
+			return a[column] > b[column] ? 1 : -1;
+		});
+		this.setState({
+			data: item,
+		});
+	}
+
 	render() {
 		return (
 			<table>
-				<thead>
+				<thead onClick={this.sort}>
 				<tr>
 					{headers.map((header, index) => <th key={index}>{header}</th>)}
 				</tr>
 				</thead>
 				<tbody>
-				{this.props.initialData.map((row, index) =>
+				{this.state.data.map((row, index) =>
 					<tr key={index}>{row.map((cell, index) => {
 							return <td key={index}>{cell}</td>
 						})
