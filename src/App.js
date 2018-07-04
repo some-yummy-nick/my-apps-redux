@@ -71,35 +71,51 @@ class Table extends Component {
 		});
 	}
 
+	search = (e) => {
+		var needle = e.target.value.toLowerCase();
+		if (!needle) {
+			this.setState({data: this.props.initialData});
+			return;
+		}
+
+		var searchdata = this.props.initialData.filter(function (dat) {
+			return dat.toString().toLowerCase().indexOf(needle) > -1;
+		});
+
+		this.setState({data: searchdata});
+	}
+
 	render() {
 		return (
-			<table>
-				<thead onClick={this.sort}>
-				<tr>
-					{headers.map((header, index) => {
-							if (this.state.sortby === index) {
-								header += this.state.descending ? ' \u2191' : ' \u2193'
+			<div>
+				<form><input type="text" placeholder="search" onChange={this.search}/></form>
+				<table>
+					<thead onClick={this.sort}>
+					<tr>
+						{headers.map((header, index) => {
+								if (this.state.sortby === index) {
+									header += this.state.descending ? ' \u2191' : ' \u2193'
+								}
+								return <th key={index}>{header}</th>
 							}
-							return <th key={index}>{header}</th>
+						)}
+					</tr>
+					</thead>
+					<tbody onDoubleClick={this.showEditor}>
+					{this.state.data.map((row, rowindex) =>
+						<tr key={rowindex}>{row.map((cell, cellindex) => {
+							var content = cell;
+							var edit = this.state.edit;
+							if (edit && edit.row === rowindex && edit.cell === cellindex) {
+								content = <form onSubmit={this.save}><input type="text" defaultValue={cell}/></form>;
+							}
+							return <td key={cellindex} data-row={rowindex}>{content}</td>
+						})
 						}
-					)}
-				</tr>
-				</thead>
-				<tbody onDoubleClick={this.showEditor}>
-				{this.state.data.map((row, rowindex) =>
-					<tr key={rowindex}>{row.map((cell, cellindex) => {
-						var content = cell;
-						var edit = this.state.edit;
-						if (edit && edit.row === rowindex && edit.cell === cellindex) {
-							content = <form onSubmit={this.save}><input type="text" defaultValue={cell}/></form>;
-						}
-						return <td key={cellindex} data-row={rowindex}>{content}</td>
-					})
-					}
-					</tr>)}
-				</tbody>
-			</table>
-
+						</tr>)}
+					</tbody>
+				</table>
+			</div>
 		);
 	}
 }
@@ -114,7 +130,6 @@ Table.propTypes = {
 		)
 	)
 }
-
 
 class App extends Component {
 	render() {
