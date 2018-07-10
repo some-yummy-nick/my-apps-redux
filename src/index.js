@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import App from './App';
+import App from './containers/App';
+import './style.css';
+import store from './store/';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const render = () => ReactDOM.render(<App />, document.getElementById('root'));
+render();
+store.subscribe(render);
