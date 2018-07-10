@@ -1,16 +1,5 @@
 import React from 'react';
-import store from "../store/";
-function setTechnology (text) {
-	return {
-		type: "SET_TECHNOLOGY",
-		tech: text
-	}
-}
-
-function dispatchBtnAction(e) {
-	const tech = e.target.dataset.tech;
-	store.dispatch(setTechnology(tech));
-}
+import dispatchBtnAction from '../actions';
 
 export default function ButtonGroup (props) {
 
