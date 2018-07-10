@@ -1,13 +1,6 @@
-import store from '../store/';
+import { SET_ACTIVE_USER_ID} from "../constants/action-types";
 
-function setTechnology (text) {
-	return {
-		type: 'SET_TECHNOLOGY',
-		tech: text
-	}
-}
-
-export default  function dispatchBtnAction(e) {
-	const tech = e.target.dataset.tech;
-	store.dispatch(setTechnology(tech));
-}
+export const setActiveUserId = id => ({
+	type: SET_ACTIVE_USER_ID,
+	payload: id
+});
