@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import store from '../store/';
+import  dispatchSubmitAction from "../actions";
 
 class App extends Component {
-  render() {
-	  const state = store.getState();
-	  return (
-      <div className="Todo">
+	render() {
+		return (
+			<div className="Todo">
+				<form action="" onSubmit={dispatchSubmitAction}>
+					<input type="text" ref="input"/>
+				</form>
 
-      </div>
-    );
-  }
+				<div>{store.getState().item}</div>
+			</div>
+		);
+	}
 }
 
 export default App;

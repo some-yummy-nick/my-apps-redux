@@ -1,4 +1,7 @@
 import { createStore } from "redux";
 import reducer from "../reducers";
-const store = createStore(reducer);
+const initialState = {
+	item:""
+};
+const store = createStore(reducer, initialState);
 export  default  store;

@@ -1,7 +1,10 @@
-export default (state="", action) => {
+export default (state, action) => {
 	switch (action.type) {
 		case "ADD_TASK":
-			return  action.payload;
+			return {
+				...state,
+				item: action.item
+			};
 		default:
 			return state;
 	}
