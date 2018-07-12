@@ -3,6 +3,11 @@ export default (state, action) => {
 		case "ADD_TASK":
 			return {
 				...state,
+				data: state.data.concat(action.data)
+			};
+		case "ADD_ITEM":
+			return {
+				...state,
 				item: action.item
 			};
 		default:
