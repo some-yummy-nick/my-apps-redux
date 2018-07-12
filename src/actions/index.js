@@ -1,5 +1,4 @@
-import{ADD_ITEM} from "../constants/action-types";
-import{ADD_TASK} from "../constants/action-types";
+import{ADD_ITEM, ADD_TASK, ADD_INIT} from "../constants/action-types";
 
 import store from '../store/';
 
@@ -17,6 +16,16 @@ const addTask = value => ({
 	type: ADD_TASK,
 	data: value
 });
+
+const addInit = value => ({
+	type: ADD_INIT,
+	data: value
+});
+
+export const dispatchInitAction=()=>{
+	store.dispatch(addInit(store.getState().data));
+
+};
 
 export const  dispatchSubmitAction =(e)=> {
 	e.preventDefault();

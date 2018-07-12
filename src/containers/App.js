@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import store from '../store/';
 
-import {dispatchInputAction, dispatchSubmitAction} from "../actions";
+import {dispatchInputAction, dispatchInitAction, dispatchSubmitAction} from "../actions";
 
 class App extends Component {
+	componentDidMount() {
+		function da() {
+			dispatchInitAction(store.getState().data)
+		}
+
+		setTimeout(da, 100);
+	}
 	render() {
+
+
 		return (
 			<div className="Todo">
 				<ul>
