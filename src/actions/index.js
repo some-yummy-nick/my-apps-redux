@@ -23,6 +23,7 @@ const addInit = value => ({
 });
 
 export const dispatchInitAction=()=>{
+	if(store.getState().data.length>30);
 	store.dispatch(addInit(store.getState().data));
 
 };
