@@ -22,10 +22,9 @@ class App extends Component {
 					})}
 				</ul>
 				<form action="" onSubmit={dispatchSubmitAction}>
-					<input type="text" onChange={dispatchInputAction}/>
+					<input type="text" value={store.getState().item} onChange={dispatchInputAction}/>
 				</form>
 
-				<div>{store.getState().item}</div>
 			</div>
 		);
 	}

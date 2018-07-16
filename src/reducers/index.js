@@ -10,6 +10,11 @@ export default (state, action) => {
 				...state,
 				item: action.item
 			};
+		case "DEFAULT_VALUE":
+			return {
+				...state,
+				item: action.item
+			};
 		default:
 			return state;
 	}

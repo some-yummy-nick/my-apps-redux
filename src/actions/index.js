@@ -1,4 +1,4 @@
-import{ADD_ITEM, ADD_TASK, ADD_INIT} from "../constants/action-types";
+import{ADD_ITEM, ADD_TASK, ADD_INIT, DEFAULT_VALUE} from "../constants/action-types";
 
 import store from '../store/';
 
@@ -9,7 +9,7 @@ const addItem = value => ({
 
 export const dispatchInputAction = (e)=> {
 	e.preventDefault();
-	store.dispatch(addItem(store.getState().item));
+	store.dispatch(addItem(e.currentTarget.value));
 };
 
 const addTask = value => ({
@@ -23,14 +23,15 @@ const addInit = value => ({
 });
 
 export const dispatchInitAction=()=>{
-	if(store.getState().data.length>30);
 	store.dispatch(addInit(store.getState().data));
-
 };
 
 export const  dispatchSubmitAction =(e)=> {
 	e.preventDefault();
-	const item =e.currentTarget.querySelector("input");
-	store.dispatch(addTask(item.value));
-	item.value="";
+	store.dispatch(addTask(store.getState().item));
+	store.dispatch({
+		type:DEFAULT_VALUE,
+		item:""
+	});
+	console.log(store.getState());
 };
