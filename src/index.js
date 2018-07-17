@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import {BrowserRouter as Router} from "react-router-dom";
+import './App.css';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+	<Router>
+		<App/>
+	</Router>, document.getElementById('root'));
