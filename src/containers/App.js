@@ -6,25 +6,28 @@ import {dispatchInputAction, dispatchInitAction, dispatchSubmitAction} from "../
 class App extends Component {
 	componentDidMount() {
 		function da() {
-			dispatchInitAction(store.getState().data)
+			dispatchInitAction()
 		}
 
 		setTimeout(da, 100);
 	}
 	render() {
 
-
 		return (
 			<div className="Todo">
 				<ul>
-					{store.getState().data.map((item, index) => {
+					{store.getState().newData.map((item, index) => {
 						return <li key={index}>{item}</li>
 					})}
 				</ul>
-				<form action="" onSubmit={dispatchSubmitAction}>
-					<input type="text" value={store.getState().item} onChange={dispatchInputAction}/>
-				</form>
 
+				<div className="pagination">
+					<ul className="pagination__list">
+						<li className="pagination__item"><a href="#" className="pagination__link" onClick={dispatchInitAction}>1</a></li>
+						<li className="pagination__item"><a href="#" className="pagination__link" onClick={dispatchInitAction}>2</a></li>
+						<li className="pagination__item"><a href="#" className="pagination__link" onClick={dispatchInitAction}>3</a></li>
+					</ul>
+				</div>
 			</div>
 		);
 	}

@@ -15,6 +15,11 @@ export default (state, action) => {
 				...state,
 				item: action.item
 			};
+		case "ADD_INIT":
+			return {
+				...state,
+				newData: action.newData
+			};
 		default:
 			return state;
 	}
